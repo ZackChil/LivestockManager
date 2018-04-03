@@ -1,0 +1,116 @@
+--For inserting animal lookup types.
+insert into LookupType (type, gender, name, minAge, maxAge, fertile, neutered, minKids, maxKids) values 
+('Cattle', 'm', 'Bull Calf', 0, 1.9, 0, 0, 0, 0),
+('Cattle', 'f', 'Heifer Calf', 0, 1.9, 0, 0, 0, 0),
+('Cattle', 'm', 'Steer Calf', 0, 1.9, 0, 1, 0, 0),
+('Cattle', 'f', 'Sterile Heifer Calf', 0, 1, 0, 1, 0, 0),
+('Cattle', 'f', 'Cow', 2, null, 1, 0, 1, null),
+('Cattle', 'm', 'Bull', 2, null, 1, 0, 0, null),
+('Cattle', 'f', 'Heifer', 2, null, 1, 0, 0, 0),
+('Cattle', 'm', 'Steer', 2, null, 0, 1, 0, 0),
+('Cattle', 'm', 'Stag', 2, null, 0, 1, 0, null),
+('Cattle', 'f', 'Sterile Heifer', 2, null, 0, 1, 0, 0),
+('Pig', 'f', 'Piglet', 0, .5, 0, 0, 0, 0),
+('Pig', 'm', 'Piglet', 0, .5, 0, 0, 0, 0),
+('Pig', 'f', 'Sterile Piglet', 0, .5, 0, 1, 0, 0),
+('Pig', 'm', 'Sterile Piglet', 0, .5, 0, 1, 0, 0),
+('Pig', 'f', 'Sow', .51, null, 1, 0, 1, null),
+('Pig', 'f', 'Sterile Sow', .51, null, 0, 1, 1, null),
+('Pig', 'f', 'Gilt', .51, null, 1, 0, 0, 0),
+('Pig', 'f', 'Sterile Gilt', .51, null, 0, 1, 0, 0),
+('Pig', 'm', 'Hog', .51, null, 0, 1, 0, null),
+('Pig', 'm', 'Boar', .51, null, 1, 0, 0, null);
+
+--For selecting all animals
+select Animal.* from Animal;
+
+--For determining the type of the animal
+select Animal.*, floor(julianday('now') - julianday(Animal.birthDay)) as daysOld, LookupType.name as TypeName,
+  (select count(*) from Parentage where motherid = Animal.id or fatherid = Animal.id) as kidCount
+  from Animal
+  left outer join LookupType
+  on Animal.type     = LookupType.type
+  AND Animal.gender  = LookupType.gender
+  AND (date('now') - date(Animal.birthDay)) >= LookupType.minAge
+  AND (
+    LookupType.maxAge is null
+    OR (date('now') - date(Animal.birthDay)) <  LookupType.maxAge
+  )
+  AND Animal.neutered = LookupType.neutered
+  AND (select count(*) from Parentage where motherid = Animal.id or fatherid = Animal.id) >= LookupType.minKids
+  AND 
+  (
+      LookupType.maxKids is null
+      OR (select count(*) from Parentage where motherid = Animal.id or fatherid = Animal.id) <= LookupType.maxKids
+  )
+ WHERE Animal.type in ('Pig');
+
+
+--For selecting parentage realationships
+ select Animal.*, mother.name as mother, father.name as father from Animal
+  left outer join Parentage
+    on Animal.id    = Parentage.animalid
+  left outer join Animal as mother on mother.id = Parentage.motherid
+  left outer join Animal as father on father.id = Parentage.fatherid
+
+--For retrieving number of offspring belonging to a specific animal id.
+ select count(*) as kids from Parentage where motherid = 2 or fatherid = 2;
+
+--For inserting animals into animal table.
+insert into Animal (type, name, gender, weightKg, fertile, neutered, birthDay, deathDay) values
+ ('Cattle', 'Jessie', 'm', 500, 1, 0, '2012-03-09', null),
+ ('Cattle', 'Bessie', 'f', 500, 1, 0, '2012-03-01', null),
+ ('Cattle', 'Patty', 'm', 250, 0, 1, '2018-03-01', null),
+ ('Pig', 'Sausage', 'f', 100, 0, 1, '2018-03-01', '2018-03-02'),
+ ('Pig', 'Ham', 'f', 100, 1, 0, '2017-03-01', null),
+ ('Pig', 'Bacon', 'm', 100, 1, 0, '2017-03-01', null);
+
+--For creating areas.
+insert into Area (name, enclsed, grazable, maxSize, electricFence, shelter) values
+ ("PastureOne", 1, 1, 25, 1, 0),
+ ("PastureTwo", 0, 1, 40, 0, 0),
+ ("PenOne", 1, 0, 10, 1, 1),
+ ("StallOne", 1, 0, 3, 0, 1);
+
+ --For creating animal/area relationship.
+insert into LookupArea (animalid, areaid) values
+ (1, 1),
+ (2, 1),
+ (3, 1),
+ (4, 3),
+ (5, 3),
+ (6, 3);
+
+--For creating parentage realationship.
+insert into Parentage (animalid, motherid, fatherid) values
+ (3,2,1),
+ (4,5,6);
+
+--Shows all animals.
+select Animal.* from Animal;
+--Shows all areas.
+select Area.* from Area;
+
+--shows animals and where they are.
+select Animal.*, Area.name from Animal
+  left outer join LookupArea
+    on Animal.id    = LookupArea.animalid
+  left outer join Area
+    on Area.id = LookupArea.areaid;
+
+--displays areas that have animals and how many.
+select Area.name, count(*) from Animal
+left outer join LookupArea
+  on Animal.id = LookupArea.animalid
+left outer join Area
+  on Area.id = LookupArea.areaid
+where Animal.deathDay is null
+group by Area.name;
+
+select Area.id, count(*) as numAssigned from Animal
+left outer join LookupArea
+  on Animal.id = LookupArea.animalid
+left outer join Area
+  on Area.id = LookupArea.areaid
+where Animal.deathDay is null and Area.id = 1
+group by Area.name;

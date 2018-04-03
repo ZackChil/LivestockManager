@@ -1,0 +1,80 @@
+--Creates Animal table
+CREATE TABLE Animal(
+  id integer primary key autoincrement,
+  type varchar (255) not null,
+  name varchar (255) not null,
+  gender varchar (1) not null,
+  weightKg not null,
+  fertile boolean default true not null,
+  neutered boolean default false not null,
+  birthDay Text not null,
+  deathDay Text,
+  unique(name)
+  CHECK (deathDay < date('now'))
+  CHECK (julianday(deathDay) >= julianday(birthDay) OR deathDay IS NULL)
+);
+
+--Creates Area table
+CREATE TABLE Area (
+  id integer primary key autoincrement,
+  name varchar (255) not null,
+  enclsed boolean default true not null,
+  grazable boolean not null,
+  maxSize integer not null,
+  electricFence boolean default false not null,
+  shelter boolean not null
+  );
+
+--Lookup table for Area
+CREATE TABLE LookupArea (
+  animalid integer not null,
+  areaid integer not null,
+  FOREIGN KEY(animalid) REFERENCES Animal(id),
+  FOREIGN KEY(areaid) REFERENCES Area(id)
+  );
+  
+--Lookup table for animal Type
+CREATE TABLE LookupType(
+  type varchar (255) not null,
+  gender varchar (1) not null,
+  name varchar (255) not null,
+  minAge Real,
+  maxAge Real,
+  fertile boolean,
+  neutered boolean default false,
+  minKids integer default 0,
+  maxKids integer,
+  unique(type, gender, minAge, maxAge, neutered)
+);
+
+CREATE TABLE Parentage(
+  animalid integer,
+  motherid integer,
+  fatherid integer,
+  FOREIGN KEY(animalid) REFERENCES Animal(id),
+  FOREIGN KEY(motherid) REFERENCES Animal(id),
+  FOREIGN KEY(fatherid) REFERENCES Animal(id)
+);
+
+CREATE TABLE MedSched (
+  id integer primary key autoincrement,
+  animalid integer not null,
+  startTime Text,
+  name varchar (255) not null,
+  mgPERkg float,
+  oneTime boolean default true,
+  givenId integer,
+  rDay integer,
+  rMonth integer,
+  rYear integer,
+  rHour integer,
+  FOREIGN KEY(animalid) REFERENCES Animal(id),
+  FOREIGN KEY(givenid) REFERENCES Given(id)
+  );
+
+CREATE TABLE Given (
+  id integer primary key autoincrement,
+  medSchedid integer not null,
+  dateGiven Text not null,
+  FOREIGN KEY(medSchedid) REFERENCES MedSched(id)
+  );
