@@ -81,6 +81,7 @@ public class ReadAnimalsFragment extends Fragment {
             {
                 info = info + "\n" + "Animal Deathday: " + animalDeathday;
             }
+            info += "\n";
         }
 
         Txt_display.setText(info);

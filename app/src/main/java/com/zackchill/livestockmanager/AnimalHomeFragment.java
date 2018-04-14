@@ -41,6 +41,10 @@ public class AnimalHomeFragment extends Fragment implements View.OnClickListener
         BnSave.setOnClickListener(this);
         BnView = view.findViewById(R.id.bn_view_animal);
         BnView.setOnClickListener(this);
+        BnUpdate= view.findViewById(R.id.bn_update_animal);
+        BnUpdate.setOnClickListener(this);
+        BnDelete = view.findViewById(R.id.bn_delete_animal);
+        BnDelete.setOnClickListener(this);
 
         return view;
     }
@@ -56,6 +60,11 @@ public class AnimalHomeFragment extends Fragment implements View.OnClickListener
             case R.id.bn_view_animal:
                 dbOpListener.dBOpPerformed(1);
                 break;
+            case R.id.bn_update_animal:
+                dbOpListener.dBOpPerformed(2);
+                break;
+            case R.id.bn_delete_animal:
+                dbOpListener.dBOpPerformed(3);
         }
     }
 

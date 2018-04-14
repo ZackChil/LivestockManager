@@ -15,7 +15,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:text="Add New Animal"
+        android:text="Update Animal"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -24,85 +24,86 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txt_animal_type"
-        android:layout_width="280dp"
+        android:id="@+id/txt_upanimal_id"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Animal Type (Cattle, Pig, etc.)"
-        android:inputType="text"
+        android:textAlignment="center"
+        android:hint="Enter an Animal Id#"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textView" />
 
     <EditText
-        android:id="@+id/txt_animal_name"
-        android:layout_width="280dp"
+        android:id="@+id/txt_upanimal_type"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="EDIT: Animal Type"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txt_upanimal_id" />
+
+    <EditText
+        android:id="@+id/txt_upanimal_name"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
-        android:hint="Animal Name"
+        android:hint="EDIT: Animal Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_animal_type" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_upanimal_type" />
 
     <EditText
-        android:id="@+id/txt_animal_gender"
-        android:layout_width="280dp"
+        android:id="@+id/txt_upanimal_gender"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="188dp"
         android:ems="10"
-        android:hint="Gender (M or F)"
+        android:hint="EDIT: Gender (M or F)"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txt_animal_weightKg"
-        android:layout_width="280dp"
+        android:id="@+id/txt_upanimal_weightKg"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="188dp"
+        android:layout_marginTop="232dp"
         android:ems="10"
-        android:hint="Weight (Kg)"
+        android:hint="EDIT: Weight (Kg)"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txt_animal_fertile"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="232dp"
-        android:ems="10"
-        android:hint="Fertile (Yes or No)"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txt_animal_neutered"
-        android:layout_width="280dp"
+        android:id="@+id/txt_upanimal_fertile"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="276dp"
         android:ems="10"
-        android:hint="Neutered (Yes or No)"
+        android:hint="EDIT: Fertile (Yes or No)"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -110,14 +111,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txt_animal_birthDay"
-        android:layout_width="280dp"
+        android:id="@+id/txt_upanimal_neutered"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="320dp"
         android:ems="10"
-        android:hint="Birthday (MM/DD/YYYY)"
+        android:hint="EDIT: Neutered (Yes or No)"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -125,14 +126,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txt_animal_deathDay"
-        android:layout_width="280dp"
+        android:id="@+id/txt_upanimal_birthDay"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="364dp"
         android:ems="10"
-        android:hint="Death Date (MM/DD/YYYY) or NA"
+        android:hint="EDIT: Birthday (MM/DD/YYYY)"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txt_upanimal_deathDay"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="408dp"
+        android:ems="10"
+        android:hint="EDIT: Death Date (MM/DD/YYYY) or NA"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -140,15 +156,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/bn_save"
+        android:id="@+id/bn_update_save"
         android:layout_width="138dp"
         android:layout_height="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:text="Save"
+        android:text="Update"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_animal_deathDay" />
-
+        app:layout_constraintTop_toBottomOf="@+id/txt_upanimal_deathDay" />
 </android.support.constraint.ConstraintLayout>

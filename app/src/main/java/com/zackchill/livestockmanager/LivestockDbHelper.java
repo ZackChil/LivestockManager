@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 public class LivestockDbHelper extends SQLiteOpenHelper
@@ -210,6 +211,34 @@ public class LivestockDbHelper extends SQLiteOpenHelper
         return cursor;
 
     }
+
+    public void updateAnimal(int id, String type, String name, String gender, float weight,
+                             boolean fertile, boolean neutered, String birthDay,
+                             String deathDay, SQLiteDatabase db)
+    {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(LivestockContract.LiveStockEntry.ANIMAL_TYPE, type);
+        contentValues.put(LivestockContract.LiveStockEntry.ANIMAL_NAME, name);
+        contentValues.put(LivestockContract.LiveStockEntry.ANIMAL_GENDER, gender);
+        contentValues.put(LivestockContract.LiveStockEntry.ANIMAL_WEIGHTKG, weight);
+        contentValues.put(LivestockContract.LiveStockEntry.ANIMAL_FERTILE, fertile);
+        contentValues.put(LivestockContract.LiveStockEntry.ANIMAL_NEUTERED, neutered);
+        contentValues.put(LivestockContract.LiveStockEntry.ANIMAL_BIRTHDAY, birthDay);
+        contentValues.put(LivestockContract.LiveStockEntry.ANIMAL_DEATHDAY, deathDay);
+
+        String select = LivestockContract.LiveStockEntry.ANIMAL_ID + " = " + id;
+
+        db.update(LivestockContract.LiveStockEntry.ANIMAL_TABLE_NAME, contentValues,
+                select, null);
+    }
+
+    public void deleteAnimal(int id, SQLiteDatabase database)
+    {
+        String selection = LivestockContract.LiveStockEntry.ANIMAL_ID
+                + " = " + id;
+        database.delete(LivestockContract.LiveStockEntry.ANIMAL_TABLE_NAME, selection, null);
+    }
+
 
     public void addArea(String name, boolean enclsed, boolean grazable, int maxSize,
                         boolean electricFence, boolean shelter, SQLiteDatabase db)

@@ -39,6 +39,14 @@ public class MainActivity extends AppCompatActivity implements AnimalHomeFragmen
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ReadAnimalsFragment()).addToBackStack(null).commit();
                 break;
+            case 2:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new UpdateAnimalFragment()).addToBackStack(null).commit();
+                break;
+            case 3:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new DeleteAnimalFragment()).addToBackStack(null).commit();
+                break;
         }
     }
 }
