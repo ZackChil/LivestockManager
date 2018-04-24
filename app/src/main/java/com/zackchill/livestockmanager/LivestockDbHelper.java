@@ -153,6 +153,7 @@ public class LivestockDbHelper extends SQLiteOpenHelper
         Log.d("Database Op", "MedSched table created...");
         sqLiteDatabase.execSQL(CREATE_GIVEN_TABLE);
         Log.d("Database Op", "Given table created...");
+
     }
 
     @Override
@@ -236,6 +237,13 @@ public class LivestockDbHelper extends SQLiteOpenHelper
     {
         String selection = LivestockContract.LiveStockEntry.ANIMAL_ID
                 + " = " + id;
+        database.delete(LivestockContract.LiveStockEntry.ANIMAL_TABLE_NAME, selection, null);
+    }
+
+    public void deleteAnimalString(String name, SQLiteDatabase database)
+    {
+        String selection = LivestockContract.LiveStockEntry.ANIMAL_NAME
+                + " = " + name;
         database.delete(LivestockContract.LiveStockEntry.ANIMAL_TABLE_NAME, selection, null);
     }
 

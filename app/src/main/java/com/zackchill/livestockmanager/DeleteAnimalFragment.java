@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +46,7 @@ public class DeleteAnimalFragment extends Fragment
         });
         return view;
     }
+
 
     private void deleteAnimal()
     {

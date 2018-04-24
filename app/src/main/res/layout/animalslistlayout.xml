@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/animal_list_linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1.0"
+    android:background="#cecdc8"
+    android:orientation="vertical">
+
+    <ListView
+        android:layout_marginTop="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:dividerHeight="5dp"
+        android:divider="#bcbaba"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:id="@+id/listView">
+    </ListView>
+
+</LinearLayout>

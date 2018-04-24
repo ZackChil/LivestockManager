@@ -10,12 +10,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello world"
-        android:textSize="18sp"
         android:textStyle="bold"
+        android:textSize="18sp"
         android:layout_margin="12dp"
-        android:layout_marginBottom="12dp"
-        android:id="@+id/txt_animal_display"
-        />
+        android:id="@+id/txt_display"/>
 
 </ScrollView>
